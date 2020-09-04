@@ -2,6 +2,7 @@ package br.com.algamoney.api.resource;
 
 import br.com.algamoney.api.domain.model.Categoria;
 import br.com.algamoney.api.domain.repository.Categorias;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -38,8 +39,10 @@ public class CategoriaResource {
     }
 
     @GetMapping("/{codigo}")
-    public Categoria buscarPorCodigo(@PathVariable Long codigo) {
-        return categorias.findById(codigo).orElse(null);
+    public ResponseEntity<Categoria> buscarPorCodigo(@PathVariable Long codigo) {
+        return categorias.findById(codigo)
+                .map(categoria -> ResponseEntity.ok(categoria))
+                .orElse(ResponseEntity.notFound().build());
     }
 
 }
