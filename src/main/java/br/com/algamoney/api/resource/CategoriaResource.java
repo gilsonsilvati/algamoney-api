@@ -24,7 +24,7 @@ public class CategoriaResource {
 
     @GetMapping
     public List<Categoria> listar() {
-        return categorias.findAll(Sort.by(Sort.Direction.ASC, "nome"));
+        return categorias.findAll();
     }
 
     @PostMapping
