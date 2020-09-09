@@ -2,8 +2,10 @@ package br.com.algamoney.api.resource;
 
 import br.com.algamoney.api.domain.model.Categoria;
 import br.com.algamoney.api.domain.repository.Categorias;
+import br.com.algamoney.api.event.RecursoCriadoEvent;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,21 +24,20 @@ public class CategoriaResource {
     @Autowired
     private Categorias categorias;
 
+    @Autowired
+    private ApplicationEventPublisher publisher;
+
     @GetMapping
     public List<Categoria> listar() {
         return categorias.findAll();
     }
 
     @PostMapping
-    public ResponseEntity<Categoria> criar(@Valid @RequestBody Categoria categoria) {
+    public ResponseEntity<Categoria> criar(@Valid @RequestBody Categoria categoria, HttpServletResponse response) {
         Categoria categoriaSalva = categorias.save(categoria);
+        publisher.publishEvent(new RecursoCriadoEvent(this, response, categoriaSalva.getCodigo()));
 
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri()
-                .path("/{codigo}")
-                .buildAndExpand(categoriaSalva.getCodigo())
-                .toUri();
-
-        return ResponseEntity.created(uri).body(categoriaSalva);
+        return ResponseEntity.status(HttpStatus.CREATED).body(categoriaSalva);
     }
 
     @GetMapping("/{codigo}")
