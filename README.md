@@ -1,4 +1,4 @@
-﻿[![Build Status](https://travis-ci.org/gilsonsilvati/algamoney-api.svg?branch=master)](https://travis-ci.org/gilsonsilvati/algamoney-api)
+﻿[![Build Status](https://travis-ci.org/gilsonsilvati/algamoney-api.svg?branch=develop)](https://travis-ci.org/gilsonsilvati/algamoney-api)
 
 # algamoney-api
  
