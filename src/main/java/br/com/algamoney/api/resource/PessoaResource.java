@@ -1,23 +1,17 @@
 package br.com.algamoney.api.resource;
 
-import br.com.algamoney.api.domain.model.Categoria;
 import br.com.algamoney.api.domain.model.Pessoa;
 import br.com.algamoney.api.domain.repository.Pessoas;
 import br.com.algamoney.api.domain.service.PessoaService;
 import br.com.algamoney.api.event.RecursoCriadoEvent;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.net.URI;
 import java.util.List;
 
 @RestController

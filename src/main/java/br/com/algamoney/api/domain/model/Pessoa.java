@@ -7,12 +7,10 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "pessoa")
 @Getter @Setter
 @DynamicUpdate
 public class Pessoa extends EntidadeBase {
