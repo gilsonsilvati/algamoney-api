@@ -4,7 +4,6 @@ import br.com.algamoney.api.domain.model.base.EntidadeBase;
 import br.com.algamoney.api.domain.model.enums.TipoLancamento;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -12,7 +11,6 @@ import java.time.LocalDate;
 
 @Entity
 @Getter @Setter
-@DynamicUpdate
 public class Lancamento extends EntidadeBase {
 
     private String descricao;

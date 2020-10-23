@@ -3,7 +3,6 @@ package br.com.algamoney.api.domain.model;
 import br.com.algamoney.api.domain.model.base.EntidadeBase;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -12,7 +11,6 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter @Setter
-@DynamicUpdate
 public class Pessoa extends EntidadeBase {
 
     @NotBlank
