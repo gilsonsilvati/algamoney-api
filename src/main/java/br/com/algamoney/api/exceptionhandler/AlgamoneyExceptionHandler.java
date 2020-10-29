@@ -1,4 +1,4 @@
-package br.com.algamoney.api.exception.handler;
+package br.com.algamoney.api.exceptionhandler;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -83,7 +83,7 @@ public class AlgamoneyExceptionHandler extends ResponseEntityExceptionHandler {
 
     @AllArgsConstructor
     @Getter
-    private static class Erro {
+    public static class Erro {
 
         private String mensagemUsuario;
         private String mensagemDesenvolvedor;
