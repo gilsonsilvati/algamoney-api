@@ -41,7 +41,7 @@ public class LancamentoResource {
         return lancamentos.filtrar(lancamentoFilter);
     }
 
-    @GetMapping("{codigo}")
+    @GetMapping("/{codigo}")
     public ResponseEntity<Lancamento> buscarPorId(@PathVariable Long codigo) {
         return lancamentos.findById(codigo)
                 .map(lancamento -> ResponseEntity.ok(lancamento))
@@ -54,6 +54,12 @@ public class LancamentoResource {
         publisher.publishEvent(new RecursoCriadoEvent(this, response, lancamentoSalvo.getCodigo()));
 
         return ResponseEntity.status(HttpStatus.CREATED).body(lancamento);
+    }
+
+    @DeleteMapping("/{codigo}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void remover(@PathVariable Long codigo) {
+        lancamentos.deleteById(codigo);
     }
 
     @ExceptionHandler({ PessoaInexistenteOuInativaException.class })
