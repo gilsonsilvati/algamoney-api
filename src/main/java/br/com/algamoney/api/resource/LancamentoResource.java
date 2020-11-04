@@ -2,6 +2,7 @@ package br.com.algamoney.api.resource;
 
 import br.com.algamoney.api.domain.model.Lancamento;
 import br.com.algamoney.api.domain.repository.Lancamentos;
+import br.com.algamoney.api.domain.repository.filter.LancamentoFilter;
 import br.com.algamoney.api.domain.service.LancamentoService;
 import br.com.algamoney.api.domain.service.exception.PessoaInexistenteOuInativaException;
 import br.com.algamoney.api.event.RecursoCriadoEvent;
@@ -10,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,8 +37,8 @@ public class LancamentoResource {
     private MessageSource messageSource;
 
     @GetMapping
-    public List<Lancamento> listar() {
-        return lancamentos.findAll();
+    public List<Lancamento> pesquisar(LancamentoFilter lancamentoFilter) {
+        return lancamentos.filtrar(lancamentoFilter);
     }
 
     @GetMapping("{codigo}")
