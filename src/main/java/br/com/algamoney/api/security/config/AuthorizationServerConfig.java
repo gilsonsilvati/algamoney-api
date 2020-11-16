@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -18,7 +19,7 @@ import org.springframework.web.filter.CorsFilter;
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
-    private static final int ACCESS_TOKEN_VALIDITY = 20;
+    private static final int ACCESS_TOKEN_VALIDITY = 1800;
     private static final int REFRESH_TOKEN_VALIDITY = 3600 * 24;
 
     @Autowired
@@ -27,11 +28,14 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private CorsFilter corsFilter;
 
+    @Autowired
+    private UserDetailsService userDetailsService;
+
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
                 .withClient("angular")
-                .secret("@ngul@r0")
+                .secret("$2a$10$eTR54sTlFC5yTBhbBdEGE.ToAnx/tNfOTclNbVz9h5YznT3SyTQgu")
                 .scopes("read", "white")
                 .authorizedGrantTypes("password", "refresh_token")
                 .accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY)
@@ -44,6 +48,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .tokenStore(tokenStore())
                 .accessTokenConverter(accessTokenConverter())
                 .reuseRefreshTokens(false)
+                .userDetailsService(userDetailsService)
                 .authenticationManager(authenticationManager);
     }
 
