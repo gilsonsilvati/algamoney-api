@@ -1,4 +1,4 @@
-package br.com.algamoney.api.config;
+package br.com.algamoney.api.security.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

@@ -1,4 +1,4 @@
-package br.com.algamoney.api.config;
+package br.com.algamoney.api.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
