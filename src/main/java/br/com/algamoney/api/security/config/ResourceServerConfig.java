@@ -1,5 +1,7 @@
 package br.com.algamoney.api.security.config;
 
+import br.com.algamoney.api.property.AlgamoneyApiProperty;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
@@ -15,12 +17,14 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 import java.time.Duration;
-import java.util.Arrays;
 
 @Configuration
 @EnableResourceServer
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
+
+    @Autowired
+    private AlgamoneyApiProperty algamoneyApiProperty;
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
@@ -46,7 +50,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
         config.setMaxAge(Duration.ofHours(1L));
-        config.setAllowedOrigins(Arrays.asList("http://localhost:8000")); // TODO: trazer do banco
+        config.setAllowedOrigins(algamoneyApiProperty.getOriginsPermitidas());
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
