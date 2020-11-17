@@ -3,6 +3,7 @@ package br.com.algamoney.api.resource;
 import br.com.algamoney.api.domain.model.Lancamento;
 import br.com.algamoney.api.domain.repository.Lancamentos;
 import br.com.algamoney.api.domain.repository.filter.LancamentoFilter;
+import br.com.algamoney.api.domain.repository.projection.ResumoLancamento;
 import br.com.algamoney.api.domain.service.LancamentoService;
 import br.com.algamoney.api.domain.service.exception.PessoaInexistenteOuInativaException;
 import br.com.algamoney.api.event.RecursoCriadoEvent;
@@ -43,6 +44,12 @@ public class LancamentoResource {
     @PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO')")
     public Page<Lancamento> pesquisar(LancamentoFilter lancamentoFilter, Pageable pageable) {
         return lancamentos.filtrar(lancamentoFilter, pageable);
+    }
+
+    @GetMapping(params = "resumo")
+    @PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO')")
+    public Page<ResumoLancamento> resumir(LancamentoFilter lancamentoFilter, Pageable pageable) {
+        return lancamentos.resumir(lancamentoFilter, pageable);
     }
 
     @GetMapping("/{codigo}")
