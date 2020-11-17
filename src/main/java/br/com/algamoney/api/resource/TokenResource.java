@@ -2,7 +2,6 @@ package br.com.algamoney.api.resource;
 
 import br.com.algamoney.api.property.AlgamoneyApiProperty;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +11,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Profile("oauth-security")
 @RestController
 @RequestMapping("/tokens")
 public class TokenResource {
