@@ -8,12 +8,12 @@ import java.util.Arrays;
 import java.util.List;
 
 @ConfigurationProperties("algamoney")
+@Getter
 public class AlgamoneyApiProperty {
 
-    @Getter
-    private final List<String> originsPermitidas = Arrays.asList("http://localhost:8000");
+    @Setter
+    private List<String> originsPermitidas = Arrays.asList("http://localhost:8000");
 
-    @Getter
     private final Seguranca seguranca = new Seguranca();
 
     @Getter @Setter
