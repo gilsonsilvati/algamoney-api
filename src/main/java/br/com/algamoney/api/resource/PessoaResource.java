@@ -6,6 +6,8 @@ import br.com.algamoney.api.domain.service.PessoaService;
 import br.com.algamoney.api.event.RecursoCriadoEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("/pessoas")
@@ -29,8 +30,9 @@ public class PessoaResource {
     private ApplicationEventPublisher publisher;
 
     @GetMapping
-    public List<Pessoa> listar() {
-        return pessoas.findAll();
+    @PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA')")
+    public Page<Pessoa> pesquisar(@RequestParam(required = false, defaultValue = "%") String nome, Pageable pageable) {
+        return pessoas.findByNomeContaining(nome, pageable);
     }
 
     @PostMapping
