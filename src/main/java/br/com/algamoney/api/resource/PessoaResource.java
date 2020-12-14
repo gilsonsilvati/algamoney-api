@@ -29,6 +29,12 @@ public class PessoaResource {
     @Autowired
     private ApplicationEventPublisher publisher;
 
+    @GetMapping("/all")
+    @PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA')")
+    public Page<Pessoa> listar(Pageable pageable) {
+        return pessoas.findAll(pageable);
+    }
+
     @GetMapping
     @PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA')")
     public Page<Pessoa> pesquisar(@RequestParam(required = false, defaultValue = "%") String nome, Pageable pageable) {
