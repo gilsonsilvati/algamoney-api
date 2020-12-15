@@ -1,5 +1,6 @@
 package br.com.algamoney.api.domain.model;
 
+import br.com.algamoney.api.domain.model.base.EntidadeBase;
 import br.com.algamoney.api.domain.model.enums.TipoLancamento;
 
 import javax.annotation.Generated;
@@ -12,7 +13,6 @@ import java.time.LocalDate;
 @StaticMetamodel(Lancamento.class)
 public abstract class Lancamento_ {
 
-	public static volatile SingularAttribute<Lancamento, Long> codigo;
 	public static volatile SingularAttribute<Lancamento, String> observacao;
 	public static volatile SingularAttribute<Lancamento, TipoLancamento> tipo;
 	public static volatile SingularAttribute<Lancamento, LocalDate> dataPagamento;

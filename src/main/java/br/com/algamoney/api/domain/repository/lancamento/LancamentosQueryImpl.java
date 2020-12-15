@@ -48,6 +48,7 @@ public class LancamentosQueryImpl implements LancamentosQuery {
         Root<Lancamento> root = criteria.from(Lancamento.class);
 
         criteria.select(builder.construct(ResumoLancamento.class
+                , root.get("codigo")
                 , root.get(Lancamento_.descricao)
                 , root.get(Lancamento_.dataVencimento), root.get(Lancamento_.dataPagamento)
                 , root.get(Lancamento_.valor), root.get(Lancamento_.tipo)

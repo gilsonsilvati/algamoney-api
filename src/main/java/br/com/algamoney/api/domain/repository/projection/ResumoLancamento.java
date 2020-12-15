@@ -16,6 +16,7 @@ import java.time.LocalDate;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResumoLancamento {
 
+	private Long codigo;
 	private String descricao;
 	private LocalDate dataVencimento;
 	private LocalDate dataPagamento;
